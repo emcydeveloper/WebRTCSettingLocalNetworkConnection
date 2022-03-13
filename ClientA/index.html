@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client A</title>
+</head>
+<body>
+    
+    <h1>Testing local withing browser peer to peer Chat</h1>
+
+    <div>
+    <button id="openClientB">Click me to generate Client A ICE candidate</button>
+    </div>
+
+    <div>
+    Client A Offer: <input type="text" id="clientA_Offer" name="clientA_Offer">
+</div>
+   
+
+   <div>
+    Client B Answer: <input type="text" id="clientB_Answer" name="clientA_Offer">
+    <button id="ConnectToB">Click to Connect</button>
+</div>
+
+
+    <div>
+        
+        Enter your message: <input type="text" id="ClientAMessage" value="Send Hi to Client - B" />
+        <button id="sendmessagetoB"">send</button>
+    </div>
+    <p id="messages"></p>
+    <script src="clientA.js"></script>
+    <!-- <script src="clientB.js"></script> -->
+</body>
+</html>
