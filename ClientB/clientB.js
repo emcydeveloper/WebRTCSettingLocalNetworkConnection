@@ -46,8 +46,9 @@ async function client_B(offer) {
   iceConfiguration.iceServers.push({
     urls: "stun:stun1.l.google.com:19302",
   });
-  console.log(offer);
-  console.log(typeof offer);
+
+
+
   let answer;
   const remoteConnection = new RTCPeerConnection(iceConfiguration);
 
@@ -82,7 +83,7 @@ async function client_B(offer) {
       });
   };
 
-  remoteConnection.setRemoteDescription(offer).then((a) => console.log("done"));
+  remoteConnection.setRemoteDescription(offer).then((a) => console.log("Offer set"));
 
   //create answer
   await remoteConnection

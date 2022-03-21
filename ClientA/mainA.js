@@ -31,8 +31,13 @@ let i = 0;
 
     console.log("Am after in:- ",e.candidate.type)
 
+
+
     console.log(" NEW ice candidnat!! on localconnection reprinting SDP ");
     const offer = JSON.stringify(localConnection.localDescription);
+    if(e.candidate.type == "srflx"){
+      console.log(`Am dispalying the main cri - ${offer}`)
+    }
     console.log("I am from client A - " + offer);
     document.getElementById("clientA_Offer").value = offer;
     // document.getElementById("openClientB").addEventListener("click", );
