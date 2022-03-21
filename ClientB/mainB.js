@@ -20,8 +20,6 @@ function myFunction() {
   client_B(JSON.parse(sendOffer.val));
 }
 
-
-
 // document.getElementById("getingpara").addEventListener("click", function () {
 //   let offer = document.getElementById("Response").value;
 //   console.log(offer);
@@ -31,27 +29,33 @@ function myFunction() {
 
 //document.getElementById("getingpara").addEventListener("click",client_B);
 
+const iceConfiguration = {};
+iceConfiguration.iceServers = [];
+//turn server
+iceConfiguration.iceServers.push({
+  urls: "stun:stun.l.google.com:19302",
+});
+
 async function client_B(offer) {
   //getOffer
 
   //const offer = {"type":"offer","sdp":"v=0\r\no=- 2794800499485477739 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=application 56769 UDP/DTLS/SCTP webrtc-datachannel\r\nc=IN IP4 192.168.0.101\r\na=candidate:3350409123 1 udp 2122260223 192.168.0.101 56769 typ host generation 0 network-id 1\r\na=candidate:4214507315 1 udp 2122194687 192.168.149.1 56770 typ host generation 0 network-id 2\r\na=candidate:1773322460 1 udp 2122129151 192.168.126.1 56771 typ host generation 0 network-id 3\r\na=candidate:2301678419 1 tcp 1518280447 192.168.0.101 9 typ host tcptype active generation 0 network-id 1\r\na=candidate:3048717251 1 tcp 1518214911 192.168.149.1 9 typ host tcptype active generation 0 network-id 2\r\na=candidate:657538092 1 tcp 1518149375 192.168.126.1 9 typ host tcptype active generation 0 network-id 3\r\na=ice-ufrag:mzey\r\na=ice-pwd:DFZjQwnlul1QN5mmgJMYz13Z\r\na=ice-options:trickle\r\na=fingerprint:sha-256 BD:2C:61:4A:56:B9:7A:42:FA:55:10:1E:1D:DF:2D:37:F3:9D:D1:04:FA:2F:AD:49:92:FB:8C:4E:66:E3:7F:67\r\na=setup:actpass\r\na=mid:0\r\na=sctp-port:5000\r\na=max-message-size:262144\r\n"};
   //set offer const offer = ...
-  const iceConfiguration = {};
-  iceConfiguration.iceServers = [];
-  //turn server
-  iceConfiguration.iceServers.push({
-    urls: 'stun:stun.l.google.com:19302',
-  });
-  //stun  server
-  iceConfiguration.iceServers.push({
-    urls: "stun:stun1.l.google.com:19302",
-  });
+
   console.log(offer);
   console.log(typeof offer);
   let answer;
+  
   const remoteConnection = new RTCPeerConnection(iceConfiguration);
-
+  let i = 0;
   remoteConnection.onicecandidate = (e) => {
+    console.log("testing--------------------", i);
+    i++;
+    
+    console.log("Display candidate string:- ",e.candidate.candidate);
+
+    console.log("Am after in:- ",e.candidate.type)
+
     console.log(" NEW ice candidnat!! on localconnection reprinting SDP ");
     console.log(JSON.stringify(remoteConnection.localDescription));
   };

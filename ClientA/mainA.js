@@ -2,25 +2,35 @@
 document.getElementById("openClientB").addEventListener("click", client_A);
 
 function client_A() {
-  //you can specify a STUN server here
+  
+//you can specify a STUN server here
 
-  const iceConfiguration = {};
-  iceConfiguration.iceServers = [];
-  //turn server
-  iceConfiguration.iceServers.push({
+const iceConfiguration = { }
+iceConfiguration.iceServers = [];
+//turn server
+iceConfiguration.iceServers.push({
     urls: 'stun:stun.l.google.com:19302',
-  });
-  //stun  server
-  iceConfiguration.iceServers.push({
-    urls: "stun:stun1.l.google.com:19302",
-  });
+})
+//stun  server
+// iceConfiguration.iceServers.push({
+//                 urls: 'stun:stun1.l.google.com:19302' 
+//             })    
+
+//const localConnection = new RTCPeerConnection(iceConfiguration)
+
+
+
 
   const localConnection = new RTCPeerConnection(iceConfiguration);
-
-  // const localConnection = new RTCPeerConnection(iceServers);
-  let i = 0;
+let i = 0;
   localConnection.onicecandidate = (e) => {
+    console.log("testing--------------------", i);
     i++;
+    
+    console.log("Display candidate string:- ",e.candidate.candidate);
+
+    console.log("Am after in:- ",e.candidate.type)
+
     console.log(" NEW ice candidnat!! on localconnection reprinting SDP ");
     const offer = JSON.stringify(localConnection.localDescription);
     console.log("I am from client A - " + offer);
@@ -49,7 +59,10 @@ function client_A() {
     //localConnection.setRemoteDescription(answer)
   });
 
+  
   const sendChannel = localConnection.createDataChannel("sendChannel");
+  
+  
 
   sendChannel.onmessage = (e) => {
     console.log("messsage received!!!" + e.data);
